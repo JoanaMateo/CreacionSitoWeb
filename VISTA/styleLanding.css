@@ -1,0 +1,255 @@
+
+#h1Landig {
+    text-align: center;
+    padding: 0.5%;
+}
+#fila_1 {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0.5%;
+
+}
+#fila_1 h2 {
+    width: 100%;
+    text-align: center;
+    background-color: pink;
+    border-radius: 10px;
+}
+#fila_2 {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+#imgPiedras {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#imgPiedras img {
+    width: 60%;
+}
+#form {
+    width: 60%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #6c757d;
+    border-radius: 4%;
+    padding: 0.2%;
+}
+.form {
+    width: 100%;
+    max-width: 800px;
+    /*para que en pantallas grandes el formulario se mantenga*/
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+    /*centra horizontalmente el contenido respecto a su contenedor*/
+}
+.form label {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+.form input {
+    width: 100%;
+    height: 55%;
+    display: flex;
+    margin: 0.5%;
+}
+.form select{
+    width: 90%;
+    display: flex;
+    margin: 0.5%;
+}
+#spanLanding {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: red;
+}
+
+#divPass {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+#divResPass {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+#divResPass ul{
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+#divResPass ul li{margin-left: 10%;}
+
+.invalidaP{
+    color: red;
+}
+.validaP{
+    color:green;
+}
+input[type*="radio"]{
+    width: 10%;
+    display: flex;
+
+}
+#divAccordion-DireccionHeader{
+    width: 100%;
+    text-align: center;
+    background-color: pink;
+    border-radius: 10px;
+    padding-top: 0.2%;
+}
+.collapseDiv{
+display: none;
+}
+.mostrarDiv{
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+#fila1_c2-Direccion{
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+#fila1_c2-Tarjeta1{
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+}
+#fila1_c2-Tarjeta2{
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+}
+#fila1_c2-Tarjeta3{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+#fila1_c2-Tarjeta3 div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#fila1_c2-Tarjeta3 img{
+    width: 55%;
+    display: flex;
+}
+
+.fila_check1{
+    width: 100%;
+    display: flex;
+}
+.fila_check1 > label{
+    width: 90%;
+    display: flex;
+}
+input[type*="checkbox"]{
+    width: 10%;
+    display: flex;
+
+}
+#botonesFormulario{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0.5%;
+}
+#botonesFormulario > div{
+    width: 50%;
+    display: flex;
+    flex-flow:  column nowrap;
+    justify-content: center;
+}
+#botonesFormulario #enviarForm,#resetForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fila_3 {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    padding: 0.5%;
+
+}
+
+/*CLASES*/
+.fila{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0.2%;
+}
+.fila1_c1 {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.fila1_c2 {
+    width: 60%;
+    display: flex;
+}
+/*CLASES EVENTO DIV DIRECCION Y TARJETAS*/
+
+
+
+
+/*CODIGO RESPONSIVE*/
+@media (max-width: 600px) {
+
+    #fila_1{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    #fila_1 h2{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+#fila_2{
+    width: 100%;
+}
+    #imgPiedras{
+        display: none;
+    }
+    #form{
+        width: 100%;
+    }
+    .form{
+        width: 100%;
+        padding: 0.2%;
+    }
+
+    /*CLASES*/
+    .fila1_c1, .fila1_c2{
+        width: 100%;
+        display: flex;
+    }
+
+
+}
