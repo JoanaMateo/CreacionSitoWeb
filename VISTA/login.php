@@ -4,18 +4,14 @@
     <li class="breadcrumb-item active"><a href="index.php?nombPagina=login"></a>Login</li>
     </ol>
 </nav>
-    <?php
-    include "VISTA/pagError.php";
-    ?>
-
-
+    
     <div class="row">
         <div class="col">
             <img src="VISTA/img/piedras.png" class="img-fluid w-75 h-75" alt="">
         </div>
         <div class="col">
             <h2>Acceso al área de usuario</h2>
-            <p>Este es el espacio reservado para los miembros de nuestra tribu online. Anímate a formar parte de él <a href="index.php?pagina=landing">aquí</a>.</p>
+            <p>Este es el espacio reservado para los miembros de nuestra tribu online. Anímate a formar parte de él <a href="index.php?nombPagina=landing">aquí</a>.</p>
 
             <form action="">
                 <div class="form-group">

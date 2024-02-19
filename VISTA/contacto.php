@@ -57,7 +57,7 @@
 
                                 <!-- comprobar si tiene cuenta o si quiere recordar contraseña-->
                                 <div class="my-3">
-                                    <span>Si lo necesitas puedes consultar las <a href="index.php?pagina=preguntasFrecuentes">Preguntas Frecuentes</a></span> <br>
+                                    <span>Si lo necesitas puedes consultar las <a href="index.php?nombPagina=preguntasFrecuentes">Preguntas Frecuentes</a></span> <br>
                                 </div>
                              </form>
                     

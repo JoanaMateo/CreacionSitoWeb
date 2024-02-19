@@ -33,16 +33,37 @@ class ModeloProducto extends conexionBBDD{
     }
     
     //FUNCIONES QUE HACEN LA CONSULTA DE PRODUCTOS:
-    public function getListadoProductosApi ($tabla, $categoria=null,$pagina,$registros, $inicio){
-        if($categoria!=null){
+    public function getListadoProductosApi ($tabla, $busqueda=null, $categoria=null,$pagina,$registros, $inicio){
+        if($categoria!=null && $busqueda==null){
             $query= "SELECT * FROM $tabla WHERE categoria LIKE '$categoria' LIMIT $inicio, $registros"; //variable que almacena el tipo de consulta.
-        }else{
+            }elseif($categoria==null && $busqueda==null){
             $query= "SELECT * FROM $tabla LIMIT $inicio, $registros"; //variable que almacena el tipo de consulta.
+
+            
+            }elseif($busqueda!=  null){
+                //($busqueda && strlen($busqueda)>1)
+           $this->conn->real_escape_string($busqueda);
+                $query= "SELECT * FROM $tabla WHERE nombre LIKE '%$busqueda%' LIMIT $inicio, $registros"; //variable que almacena el tipo de consulta.
         }
+        
         $statement= $this->conn->prepare($query); //variable donde almacenaremos el objeto de tipo PDOStatement
         $statement->execute();
         $results = $statement->get_result()->fetch_all(MYSQLI_ASSOC); //En una variable almaceno todos los registros de la tabla.
         
+       $arrayDatosConsulta["datosConsultaProductos"]= $results;
+       /*
+        foreach ($results as $row) {
+            $objetoProducto = new Producto();
+            $objetoProducto->setIdProducto($row['idProducto']);
+            $objetoProducto->setNombreProducto($row['nombre']);
+            $objetoProducto->setPrecioProducto($row['categoria']);
+            $objetoProducto->setNombreProducto($row['precio']);
+            $objetoProducto->setImgUrl($row['imgUrl']);
+            $objetoProducto->setDescripcionProducto($row['descripcion']);
+            
+            $arrayDatosConsulta["datosConsultaProductos"]= $objetoProducto;
+        }*/
+        /*
         foreach ($results  as $row) {
             $arrayDatosConsulta["datosConsultaProductos"]=[
                 "idProducto" => $row['idProducto'],
@@ -52,43 +73,53 @@ class ModeloProducto extends conexionBBDD{
                 "imgUrl" => $row['imgUrl'],
                 "descripcion" => $row['descripcion']
             ];
-        }
-        $datosPaginacion= $this->paginacion($tabla, $categoria, $pagina, $registros);
+        }*/
+
+        $datosPaginacion= $this->paginacion($tabla, $busqueda, $categoria, $pagina, $registros);
         $arrayDatosPaginacion=[
             "paginacion" => [
+                "categoria"=>$datosPaginacion['categoria'],
                 "total" => $datosPaginacion['total'],
                 "paginas" => $datosPaginacion['paginas'],
                 "pagina" => $datosPaginacion['pagina'],
                 "limite" => $datosPaginacion['limite']
             ]
         ];
-        $arrayResulado= array_merge($arrayDatosConsulta,$arrayDatosPaginacion);
-               
+        $arrayResultado= array_merge($arrayDatosConsulta,$arrayDatosPaginacion);
+             
         //Cerramos conexion
         $statement->close();
 
-        return $arrayResulado;
+        return $arrayResultado;
     }
-    function paginacion($tabla,$categoria=null, $pagina, $limite){
-        if($categoria!=null){
-            $total = $this->getTotalNumProductos($tabla, $categoria);
-        } else {
-           $total = $this->getTotalNumProductos($tabla);
+    function paginacion($tabla,$busqueda=null, $categoria=null, $pagina, $limite){
+        if($categoria!=null && $busqueda == null){
+            $total = $this->getTotalNumProductos($tabla,$busqueda, $categoria);
+        }elseif($categoria == null && $busqueda == null){
+            $total = $this->getTotalNumProductos($tabla);
+        } elseif($busqueda != null) {
+           $total = $this->getTotalNumProductos($tabla, $busqueda);
+
         }
         $paginas = ceil($total/$limite);//redondea hacia arriba
         
         return [
+            "categoria"=>$categoria,
             "total" => $total,
             "paginas"=> $paginas,
             "pagina" => $pagina,
             "limite" => $limite
         ];
     }
-    public function getTotalNumProductos($tabla,$categoria=null){
-        if($categoria!=null){
+    public function getTotalNumProductos($tabla, $busqueda=null, $categoria=null){
+        if($categoria!=null && $busqueda == null){
             $query = "SELECT COUNT(*) FROM $tabla WHERE categoria LIKE '$categoria'"; //variable que almacena el tipo de consulta.
-        }else{
-            $query = "SELECT COUNT(*) FROM $tabla"; //variable que almacena el tipo de consulta.
+        }elseif ($categoria==null && $busqueda==null)  {  
+            $query = "SELECT COUNT(*) FROM $tabla"; //variable que almacena el tipo de consulta. 
+
+        }elseif ($busqueda != null){
+            $query = "SELECT COUNT(*) FROM $tabla WHERE nombre LIKE '%$busqueda%'"; //variable que almacena el tipo de consulta.
+
         }
         $statement = $this->conn->prepare($query); //variable donde almacenaremos el objeto de tipo PDOStatement
         $statement->execute();
@@ -99,13 +130,4 @@ class ModeloProducto extends conexionBBDD{
         return intval($results['COUNT(*)']);
     }
     
-    
-    function busqueda($busqueda, $consulta){
-        $filtro="";
-        if($busqueda && strlen($busqueda)>1){
-            $filtro = "WHERE nombre LIKE '%$busqueda%'";
-            $consulta = $consulta.$filtro;
-        }
-        return $consulta;
-    }    
 }

@@ -1,6 +1,6 @@
 {
     "hostname":"localhost",
-    "usuario":"usuarioSprint",
-    "password":"12345",
+    "usuario":"root",
+    "password":"root",
     "basedatos":"mandalaYoga"
 }
